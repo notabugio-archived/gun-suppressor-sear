@@ -32,7 +32,7 @@ export const AUTH_SCHEMA = {
     },
     additionalProperties: {
       edgeMatchesKey: true,
-      anyOf: [{ $ref: "#/definitions/SEAAuthor" }]
+      anyOf: [{ $ref: "#/definitions/SEAAuthorEdge" }]
     }
   },
   seaAuthorId: { type: "string", maxLength: MAX_AUTHOR_ID_SIZE },
