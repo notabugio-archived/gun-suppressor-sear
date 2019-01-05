@@ -1,36 +1,43 @@
 {
-  "name": "webpack-library-starter",
-  "version": "1.0.2",
-  "description": "Produce universal library with webpack and es6",
-  "main": "lib/webpack-library-starter.js",
+  "name": "gun-suppressor-sear",
+  "version": "0.0.1",
+  "description": "SEA Read/Validation support for gun-suppressor validation",
+  "main": "lib/gun-suppressor-sear.js",
   "scripts": {
     "build": "webpack --env dev && webpack --env build && npm run test",
     "dev": "webpack --progress --colors --watch --env dev",
     "test": "mocha --require babel-register --colors ./test/*.spec.js",
     "test:watch": "mocha --require babel-register --colors -w ./test/*.spec.js",
     "test:cover": "cross-env NODE_ENV=test nyc mocha --require babel-register --colors test/*.js",
-    "repl": "node -i -e \"$(< ./lib/webpack-library-starter.js)\""
+    "repl": "node -i -e \"$(< ./lib/gun-suppressor-sear.js)\""
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/krasimir/webpack-library-starter.git"
+    "url": "https://github.com/notabugio/gun-suppressor-sear.git"
   },
-  "keywords": [
-    "webpack",
-    "es6",
-    "starter",
-    "library",
-    "universal",
-    "umd",
-    "commonjs"
-  ],
-  "author": "Krasimir Tsonev",
+  "keywords": ["gundb", "json-schema"],
+  "author": "go1dfish",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/krasimir/webpack-library-starter/issues"
+    "url": "https://github.com/notabugio/gun-suppressor-sear/issues"
   },
-  "homepage": "https://github.com/krasimir/webpack-library-starter",
+  "homepage": "https://github.com/notabugio/gun-suppressor-sear",
+  "peerDependencies": {
+    "ajv": "^6.6.2",
+    "gun": "^0.9.999996",
+    "ramda": "^0.26.1",
+    "route-parser": "^0.0.5",
+    "gun-suppressor": "https://github.com/notabugio/gun-suppressor",
+    "text-encoding": "^0.7.0",
+    "node-webcrypto-ossl": "^1.0.39"
+  },
   "devDependencies": {
+    "ajv": "^6.6.2",
+    "gun": "^0.9.999996",
+    "ramda": "^0.26.1",
+    "route-parser": "^0.0.5",
+    "text-encoding": "^0.7.0",
+    "node-webcrypto-ossl": "^1.0.39",
     "@babel/cli": "^7.0.0-beta.51",
     "@babel/core": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
@@ -47,6 +54,7 @@
     "jsdom": "11.11.0",
     "jsdom-global": "3.0.2",
     "mocha": "^4.0.1",
+    "prettier": "1.15.3",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.12.2",
     "webpack-cli": "^3.0.8",
