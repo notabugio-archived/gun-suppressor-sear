@@ -63,8 +63,7 @@ export const AUTH_SCHEMA = {
     },
     additionalProperties: {
       sea: {
-        nyOf: [
-          { $ref: "schema.json#/definitions/GunNodeMeta" },
+        anyOf: [
           { $ref: "schema.json#/definitions/GunEdge" },
           { $ref: "schema.json#/definitions/seaAuthObj" },
           { type: "null" },
