@@ -120,7 +120,7 @@ export const PERMISSIVE_SCHEMA = {
 };
 
 export const read = (data, key, pair = false) =>
-  verify(data[key], pair).then(r => {
+  verify(unpack(data[key], key, data), pair).then(r => {
     if (typeof r === "undefined") {
       throw new Error("invalid sea data");
     }
