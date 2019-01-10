@@ -9,7 +9,7 @@ import {
 global.Gun = global.Gun || require("gun/gun");
 const {
   verify,
-  opt: { unpack, parse }
+  opt: { pack, unpack }
 } = require("gun/sea");
 
 const MAX_AUTHOR_ALIAS_SIZE = 512;
@@ -120,7 +120,7 @@ export const PERMISSIVE_SCHEMA = {
 };
 
 export const read = (data, key, pair = false) =>
-  verify(unpack(parse(data[key]), key, data), pair).then(r => {
+  verify(pack(data[key], key, data, path(["_", "#"], data)), pair).then(r => {
     if (typeof r === "undefined") {
       throw new Error("invalid sea data");
     }

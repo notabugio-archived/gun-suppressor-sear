@@ -1,6 +1,6 @@
 {
   "name": "gun-suppressor-sear",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "SEA Read/Validation support for gun-suppressor validation",
   "main": "lib/gun-suppressor-sear.js",
   "scripts": {
