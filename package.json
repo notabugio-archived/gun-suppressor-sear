@@ -1,6 +1,6 @@
 {
   "name": "gun-suppressor-sear",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "SEA Read/Validation support for gun-suppressor validation",
   "main": "lib/gun-suppressor-sear.js",
   "scripts": {
@@ -15,7 +15,10 @@
     "type": "git",
     "url": "https://github.com/notabugio/gun-suppressor-sear.git"
   },
-  "keywords": ["gundb", "json-schema"],
+  "keywords": [
+    "gundb",
+    "json-schema"
+  ],
   "author": "go1dfish",
   "license": "MIT",
   "bugs": {
@@ -24,23 +27,18 @@
   "homepage": "https://github.com/notabugio/gun-suppressor-sear",
   "peerDependencies": {
     "ajv": "^6.6.2",
-    "gun": "^0.9.999996",
+    "gun": "^0.9.999997",
+    "gun-suppressor": "https://github.com/notabugio/gun-suppressor.git",
+    "node-webcrypto-ossl": "^1.0.39",
     "ramda": "^0.26.1",
     "route-parser": "^0.0.5",
-    "gun-suppressor": "https://github.com/notabugio/gun-suppressor",
-    "text-encoding": "^0.7.0",
-    "node-webcrypto-ossl": "^1.0.39"
+    "text-encoding": "^0.7.0"
   },
   "devDependencies": {
-    "ajv": "^6.6.2",
-    "gun": "^0.9.999996",
-    "ramda": "^0.26.1",
-    "route-parser": "^0.0.5",
-    "text-encoding": "^0.7.0",
-    "node-webcrypto-ossl": "^1.0.39",
     "@babel/cli": "^7.0.0-beta.51",
     "@babel/core": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
+    "ajv": "^6.6.2",
     "babel-eslint": "^8.0.3",
     "babel-loader": "^8.0.0-beta.4",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -54,12 +52,16 @@
     "jsdom": "11.11.0",
     "jsdom-global": "3.0.2",
     "mocha": "^4.0.1",
+    "node-webcrypto-ossl": "^1.0.39",
+    "nyc": "^13.1.0",
     "prettier": "1.15.3",
+    "ramda": "^0.26.1",
+    "route-parser": "^0.0.5",
+    "text-encoding": "^0.7.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.12.2",
     "webpack-cli": "^3.0.8",
-    "yargs": "^10.0.3",
-    "nyc": "^13.1.0"
+    "yargs": "^10.0.3"
   },
   "nyc": {
     "sourceMap": false,
