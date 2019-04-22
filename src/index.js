@@ -6,12 +6,6 @@ import {
   initAjv as ajvBaseInit
 } from "@notabug/gun-suppressor";
 
-global.Gun = global.Gun || require("gun/gun");
-const {
-  verify,
-  opt: { pack, unpack }
-} = require("gun/sea");
-
 const MAX_AUTHOR_ALIAS_SIZE = 512;
 const MAX_AUTHOR_ID_SIZE = 128; // ???
 const authorPattern = "~:authorId";
@@ -119,22 +113,27 @@ export const PERMISSIVE_SCHEMA = {
   ...GUN_PERMISSIVE_SCHEMA
 };
 
-export const read = (data, key, pair = false) => {
-  const packed = pack(data[key], key, data, R.path(["_", "#"], data));
+export const read = (Gun, data, key, pair = false) => {
+  const packed = Gun.SEA.opt.pack(
+    data[key],
+    key,
+    data,
+    R.path(["_", "#"], data)
+  );
 
-  return verify(packed, pair).then(r => {
+  return Gun.SEA.verify(packed, pair).then(r => {
     if (typeof r === "undefined") {
       throw new Error("invalid sea data");
     }
-    return unpack(r, key, data);
+    return Gun.SEA.opt.unpack(r, key, data);
   });
 };
 
-const validateSeaProperty = ajv => (
+const validateSeaProperty = (Gun, ajv) => (
   schema,
   data,
   pSchema,
-  cPath,
+  _cPath,
   parentData,
   keyInParent
 ) => {
@@ -158,7 +157,7 @@ const validateSeaProperty = ajv => (
   });
   let result;
 
-  return read(parentData, keyInParent, authorId)
+  return read(Gun, parentData, keyInParent, authorId)
     .then(res => (result = res))
     .then(res => R.assoc(keyInParent, res, parentData))
     .catch(err => {
@@ -196,14 +195,15 @@ const validateSeaProperty = ajv => (
     });
 };
 
-export const initAjv = R.compose(
-  ajv => {
-    ajv.addKeyword("sea", {
-      async: true,
-      modifying: true,
-      validate: validateSeaProperty(ajv)
-    });
-    return ajv;
-  },
-  ajvBaseInit
-);
+export const initAjv = (conf, Gun = global.Gun) =>
+  R.compose(
+    ajv => {
+      ajv.addKeyword("sea", {
+        async: true,
+        modifying: true,
+        validate: validateSeaProperty(Gun, ajv)
+      });
+      return ajv;
+    },
+    ajvBaseInit
+  )(conf);
