@@ -1,6 +1,6 @@
 {
   "name": "@notabug/gun-suppressor-sear",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "SEA Read/Validation support for gun-suppressor validation",
   "main": "lib/@notabug/gun-suppressor-sear.js",
   "scripts": {
@@ -28,10 +28,13 @@
   "dependencies": {
     "@notabug/gun-suppressor": "^0.1.0",
     "ajv": "^6.6.2",
-    "gun": "^0.2019.331",
     "ramda": "^0.26.1",
-    "route-parser": "^0.0.5",
-    "text-encoding": "^0.7.0"
+    "route-parser": "^0.0.5"
+  },
+  "peerDependencies": {
+    "gun": "^0.2019.331",
+    "text-encoding": "^0.7.0",
+    "node-webcrypto-ossl": "^1.0.39"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.51",
@@ -51,7 +54,6 @@
     "jsdom": "11.11.0",
     "jsdom-global": "3.0.2",
     "mocha": "^4.0.1",
-    "node-webcrypto-ossl": "^1.0.39",
     "nyc": "^13.1.0",
     "prettier": "1.15.3",
     "ramda": "^0.26.1",
