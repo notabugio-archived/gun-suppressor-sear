@@ -161,7 +161,6 @@ const validateSeaProperty = (Gun, ajv) => (
     .then(res => (result = res))
     .then(res => R.assoc(keyInParent, res, parentData))
     .catch(err => {
-      if (typeof parentData[keyInParent] === "undefined") return false;
       console.error(
         "key err",
         soul,
@@ -173,13 +172,13 @@ const validateSeaProperty = (Gun, ajv) => (
       return false;
     })
     .then(res => {
-      if (!res) {
+      if (!res || typeof res[keyInParent] === "undefined") {
         delete parentData[keyInParent];
         delete (R.path(["_", ">"], parentData) || {})[keyInParent];
-        // console.error("sea prop err", soul, keyInParent, result, pSchema);
+        console.error("sea prop err", soul, keyInParent, result, pSchema);
         return res;
       }
-      return Promise.resolve(validate()).then(isValid => {
+      return Promise.resolve(validate(res)).then(isValid => {
         if (!isValid) {
           console.error(
             "sea validation err",
