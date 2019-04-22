@@ -1,15 +1,15 @@
 {
-  "name": "gun-suppressor-sear",
-  "version": "0.0.7",
+  "name": "@notabug/gun-suppressor-sear",
+  "version": "0.1.1",
   "description": "SEA Read/Validation support for gun-suppressor validation",
-  "main": "lib/gun-suppressor-sear.js",
+  "main": "lib/@notabug/gun-suppressor-sear.js",
   "scripts": {
     "build": "webpack --env dev && webpack --env build && npm run test",
     "dev": "webpack --progress --colors --watch --env dev",
     "test": "mocha --require babel-register --colors ./test/*.spec.js",
     "test:watch": "mocha --require babel-register --colors -w ./test/*.spec.js",
     "test:cover": "cross-env NODE_ENV=test nyc mocha --require babel-register --colors test/*.js",
-    "repl": "node -i -e \"$(< ./lib/gun-suppressor-sear.js)\""
+    "repl": "node -i -e \"$(< ./lib/@notabug/gun-suppressor-sear.js)\""
   },
   "repository": {
     "type": "git",
@@ -25,11 +25,10 @@
     "url": "https://github.com/notabugio/gun-suppressor-sear/issues"
   },
   "homepage": "https://github.com/notabugio/gun-suppressor-sear",
-  "peerDependencies": {
+  "dependencies": {
+    "@notabug/gun-suppressor": "^0.1.0",
     "ajv": "^6.6.2",
-    "gun": "^0.9.999997",
-    "gun-suppressor": "https://github.com/notabugio/gun-suppressor.git",
-    "node-webcrypto-ossl": "^1.0.39",
+    "gun": "^0.2019.331",
     "ramda": "^0.26.1",
     "route-parser": "^0.0.5",
     "text-encoding": "^0.7.0"

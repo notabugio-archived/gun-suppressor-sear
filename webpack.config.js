@@ -51,9 +51,10 @@ const config = {
     ramda: "ramda",
     ajv: "ajv",
     "route-parser": "route-parser",
+    "gun": "gun",
     "gun/gun": "gun/gun",
     "gun/sea": "gun/sea",
-    "gun-suppressor": "gun-suppressor"
+    "@notabug/gun-suppressor": "@notabug/gun-suppressor"
   }
 };
 

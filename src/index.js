@@ -1,10 +1,10 @@
 /* globals Promise */
-import { compose, path, assoc } from "ramda";
+import * as R from "ramda";
 import Route from "route-parser";
 import {
   PERMISSIVE_SCHEMA as GUN_PERMISSIVE_SCHEMA,
   initAjv as ajvBaseInit
-} from "gun-suppressor";
+} from "@notabug/gun-suppressor";
 
 global.Gun = global.Gun || require("gun/gun");
 const {
@@ -119,13 +119,16 @@ export const PERMISSIVE_SCHEMA = {
   ...GUN_PERMISSIVE_SCHEMA
 };
 
-export const read = (data, key, pair = false) =>
-  verify(pack(data[key], key, data, path(["_", "#"], data)), pair).then(r => {
+export const read = (data, key, pair = false) => {
+  const packed = pack(data[key], key, data, R.path(["_", "#"], data));
+
+  return verify(packed, pair).then(r => {
     if (typeof r === "undefined") {
       throw new Error("invalid sea data");
     }
     return unpack(r, key, data);
   });
+};
 
 const validateSeaProperty = ajv => (
   schema,
@@ -135,7 +138,7 @@ const validateSeaProperty = ajv => (
   parentData,
   keyInParent
 ) => {
-  const soul = path(["_", "#"], parentData);
+  const soul = R.path(["_", "#"], parentData);
 
   if (keyInParent === "_") return true;
   const { authorId } =
@@ -157,16 +160,24 @@ const validateSeaProperty = ajv => (
 
   return read(parentData, keyInParent, authorId)
     .then(res => (result = res))
-    .then(res => assoc(keyInParent, res, parentData))
+    .then(res => R.assoc(keyInParent, res, parentData))
     .catch(err => {
-      console.error("key err", soul, keyInParent, err.stack || err);
+      if (typeof parentData[keyInParent] === "undefined") return false;
+      console.error(
+        "key err",
+        soul,
+        keyInParent,
+        authorId,
+        parentData[keyInParent],
+        err.stack || err
+      );
       return false;
     })
     .then(res => {
       if (!res) {
         delete parentData[keyInParent];
-        delete (path(["_", ">"], parentData) || {})[keyInParent];
-        console.error("sea prop err", soul, keyInParent, result, pSchema);
+        delete (R.path(["_", ">"], parentData) || {})[keyInParent];
+        // console.error("sea prop err", soul, keyInParent, result, pSchema);
         return res;
       }
       return Promise.resolve(validate()).then(isValid => {
@@ -185,7 +196,7 @@ const validateSeaProperty = ajv => (
     });
 };
 
-export const initAjv = compose(
+export const initAjv = R.compose(
   ajv => {
     ajv.addKeyword("sea", {
       async: true,
