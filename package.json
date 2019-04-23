@@ -1,6 +1,6 @@
 {
   "name": "@notabug/gun-suppressor-sear",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "SEA Read/Validation support for gun-suppressor validation",
   "main": "lib/@notabug/gun-suppressor-sear.js",
   "scripts": {

@@ -35,7 +35,14 @@ export const AUTH_SCHEMA = {
       {
         type: "object",
         properties: {
-          ek: { type: "string" },
+          ek: {
+            type: "object",
+            properties: {
+              ct: { type: "string" },
+              iv: { type: "string" },
+              s: { type: "string" }
+            }
+          },
           s: { type: "string" }
         }
       },
